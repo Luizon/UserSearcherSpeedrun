@@ -9,14 +9,15 @@ async function testBorrar() {
     start = new Date();
     salir = false;
     hUsers = [];
-    // letter = "a"
-    abcd = "abcdefghijklmnopqrstuvwxyz";
+    letter = $(input).val();
+    // abcd = "abcdefghijklmnopqrstuvwxyz";
     $("#loading").html("0% cargando...");
     $("#time").html(start);
     $("#users").html("<h1>Lista de usuarios</h1>");
-    for( let i = 0 ; i < abcd.length ; i++ )
+    // for( let i = 0 ; i < abcd.length ; i++ )
     while(!salir)
-        await $.get(`https://www.speedrun.com/api/v1/users?name=${abcd.charAt(i)}&max=200&size=200&offset=${offset}`)
+        await $.get(`https://www.speedrun.com/api/v1/users?name=${letter}&max=200&size=200&offset=${offset}`)
+        // await $.get(`https://www.speedrun.com/api/v1/users?name=${abcd.charAt(i)}&max=200&size=200&offset=${offset}`)
             .done(answer => {
                 $("#loading").html(Math.floor((i*100)/abcd.length) + "% cargando...");
                 if(answer.data.length == 0) {
