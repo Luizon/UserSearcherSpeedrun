@@ -13,7 +13,7 @@ async function testBorrar() {
     abcd = "abcdefghijklmnopqrstuvwxyz";
     $("#loading").html("0% cargando...");
     $("#time").html(start);
-    $("#users").html();
+    $("#users").html("<h1>Lista de usuarios</h1>");
     for( let i = 0 ; i < abcd.length ; i++ )
     while(!salir)
         await $.get(`https://www.speedrun.com/api/v1/users?name=${abcd.charAt(i)}&max=200&size=200&offset=${offset}`)
