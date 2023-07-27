@@ -5,7 +5,6 @@ let end;
 
 async function testBorrar() {
     // 97612 con a
-    let offset = 0;
     start = new Date();
     hUsers = [];
     // letter = "a"
@@ -15,6 +14,7 @@ async function testBorrar() {
     $("#users").html("<h1>Lista de usuarios</h1>");
     for( let i = 0 ; i < abcd.length ; i++ ) {
         salir = false;
+        let offset = 0;
         while(!salir)
             await $.get(`https://www.speedrun.com/api/v1/users?name=${abcd.charAt(i)}&max=200&size=200&offset=${offset}`)
                 .done(answer => {
