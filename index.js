@@ -10,7 +10,7 @@ async function testBorrar() {
     // letter = "a"
     abcd = "abcdefghijklmnopqrstuvwxyz";
     $("#loading").html("0% cargando...");
-    $("#time").html(start);
+    $("#time").html("hora inicio: " + start);
     $("#users").html("<h1>Lista de usuarios</h1>");
     for( let i = 0 ; i < abcd.length ; i++ ) {
         salir = false;
