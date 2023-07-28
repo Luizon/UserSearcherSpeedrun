@@ -20,6 +20,7 @@ async function testBorrar() {
             await $.get(`https://www.speedrun.com/api/v1/users?name=${letter}&max=200&size=200&offset=${offset}`)
             // await $.get(`https://www.speedrun.com/api/v1/users?name=${abcd.charAt(i)}&max=200&size=200&offset=${offset}`)
                 .done(answer => {
+                    tiempoTranscurrido();
                     // porcentaje = Math.floor((i*100)/abcd.length);
                     if(answer.data.length == 0) {
                         salir = true;
@@ -50,6 +51,11 @@ async function testBorrar() {
         // }    
     $("#loading").html("Terminó proceso de busqueda con " + hUsers.length + " usuarios encontrados.");
     end = new Date();
+    tiempoTranscurrido();
+    console.log(hUsers);
+}
+
+function tiempoTranscurrido() {
     let hours = Math.floor(((end - start) / 3600000) % 60);
     if(hours < 10)
         hours = "0" + hours;
@@ -59,6 +65,5 @@ async function testBorrar() {
     let sec = Math.floor(((end - start)/1000) % 60);
     if(sec < 10)
         sec = "0" + sec;
-    $("#time").html(`Duró: ${hours}:${min}:${sec}`);
-    console.log(hUsers);
+    $("#time").html(`${hours}:${min}:${sec}`);
 }
