@@ -50,12 +50,12 @@ async function testBorrar() {
                 })
         // }    
     $("#loading").html("Terminó proceso de busqueda con " + hUsers.length + " usuarios encontrados.");
-    end = new Date();
     tiempoTranscurrido();
     console.log(hUsers);
 }
 
 function tiempoTranscurrido() {
+    end = new Date();
     let hours = Math.floor(((end - start) / 3600000) % 60);
     if(hours < 10)
         hours = "0" + hours;
