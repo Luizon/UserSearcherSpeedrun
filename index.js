@@ -50,7 +50,15 @@ async function testBorrar() {
         // }    
     $("#loading").html("Terminó proceso de busqueda con " + hUsers.length + " usuarios encontrados.");
     end = new Date();
-    $("#loading").html("Terminó proceso de busqueda con " + hUsers.length + " usuarios encontrados.");
-    console.log("Quedaron " + offset + " al final");
+    let hours = Math.floor(((end - start) / 3600000) % 60);
+    if(hours < 10)
+        hours = "0" + hours;
+    let min = Math.floor(((end - start) / 60000) % 60);
+    if(min < 10)
+        min = "0" + min;
+    let sec = Math.floor(((end - start)/1000) % 60);
+    if(sec < 10)
+        sec = "0" + sec;
+    $("#time").html(`Duró: ${hours}:${min}:${sec}`);
     console.log(hUsers);
 }
