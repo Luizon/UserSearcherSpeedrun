@@ -2,12 +2,56 @@ let salir = false;
 let hUsers = [];
 let start;
 let end;
-
+// function encodeSearch64(searchText) {
+//     let rawJson = `{"query":"${searchText}","limit":500,"includeGames":false,"includeNews":false,"includePages":false,"includeSeries":false,"includeUsers":true}`;
+//     let output = btoa(rawJson);
+//     output = output.replace(/=/g, "");
+//     return output;
+// }
+// async function testBorrarV2() {
+//     // 97612 con a
+//     start = new Date();
+//     hUsers = [];
+//     character = $("input").val();
+//     abcd = "|+-_.0123456789@abcdefghijklmnopqrstuvwxyz";
+//     $("#loading").html("Cargando...");
+//     $("#time").html("hora inicio: " + start);
+//     $("#users").html("<h1>Lista de usuarios</h1>");
+//     salir = false;
+//     let offset = 0;
+//     let porcentaje = 0;
+//     await $.get(`https://www.speedrun.com/api/v2/GetSearch?_r=${encodeSearch64(character)}`)
+//         .done(answer => {
+//             console.log(answer.userList)
+//             tiempoTranscurrido();
+//             answer.userList.forEach( user => {
+//                 console.log(user)
+//                 if(user.areaId.length > 1)
+//                     if(!abcd.includes(user.areaId.charAt(1).toLowerCase()))
+//                         console.log(user.areaId);
+//                 if(user.areaId != null) {
+//                     if(user.areaId == undefined)
+//                         return;
+//                     if($("#comboCountry").val() == user.areaId) {
+//                         $("#users").html($("#users").html() + "<br>" + user.name);
+//                         hUsers.push(user.name);
+//                     }
+//                 }
+//             });
+//         })
+//         .fail(error => {
+//             console.log(error);
+//             $("#loading").html("Terminó con error");
+//         })
+//     $("#loading").html("Terminó proceso de busqueda con " + hUsers.length + " usuarios encontrados.");
+//     tiempoTranscurrido();
+//     console.log(hUsers);
+// }
 async function testBorrar() {
     // 97612 con a
     start = new Date();
     hUsers = [];
-    letter = $("input").val();
+    character = $("input").val();
     abcd = "|+-_.0123456789@abcdefghijklmnopqrstuvwxyz";
     $("#loading").html("0% cargando...");
     $("#time").html("hora inicio: " + start);
@@ -17,9 +61,10 @@ async function testBorrar() {
         let offset = 0;
         let porcentaje = 0;
         while(!salir)
-            await $.get(`https://www.speedrun.com/api/v1/users?name=${letter}&max=200&size=200&offset=${offset}`)
+            await $.get(`https://www.speedrun.com/api/v1/users?name=${character}&max=200&size=200&offset=${offset}`)
             // await $.get(`https://www.speedrun.com/api/v1/users?name=${abcd.charAt(i)}&max=200&size=200&offset=${offset}`)
                 .done(answer => {
+                    console.log(answer)
                     tiempoTranscurrido();
                     // porcentaje = Math.floor((i*100)/abcd.length);
                     if(answer.data.length == 0) {
@@ -47,6 +92,8 @@ async function testBorrar() {
                 .fail(error => {
                     console.log(error);
                     $("#loading").html("Terminó con error");
+                    if(error.responseJSON.message.toLowerCase().includes("3 characters"))
+                        $("#users").html("<b>Necesitas usar al menos 3 caracteres para hacer una búsqueda</b>");
                 })
         // }    
     $("#loading").html("Terminó proceso de busqueda con " + hUsers.length + " usuarios encontrados.");
